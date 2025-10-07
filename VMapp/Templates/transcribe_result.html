@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Transcribed & Censored Audio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background-color: #f0f2f5;
+        }
+        h2, h3 {
+            text-align: center;
+        }
+        .content {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        pre {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        .audio-player {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .buttons {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .buttons a, .buttons button {
+            margin: 0 10px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .buttons a:hover, .buttons button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h2>Transcribed Text (Censored)</h2>
+        {% if transcript %}
+            <pre>{{ transcript }}</pre>
+        {% else %}
+            <p>No transcript available.</p>
+        {% endif %}
+
+        <h3>Censored Audio</h3>
+        <div class="audio-player">
+            {% if audio %}
+                <audio controls>
+                    <source src="{{ audio }}" type="audio/wav">
+                    Your browser does not support the audio element.
+                </audio>
+            {% else %}
+                <p>No audio available.</p>
+            {% endif %}
+        </div>
+
+        <div class="buttons">
+            <a href="{% url 'video_list' %}">Back to Video List</a>
+            <a href="{% url 'moderated_frames' video_id %}">View Moderated Frames</a>
+        </div>
+    </div>
+</body>
+</html>

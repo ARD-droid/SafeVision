@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Moderated Frames</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .controls a {
+            margin: 0 10px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .controls a:hover {
+            background-color: #0056b3;
+        }
+        .frames-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .frames-container img {
+            width: 200px;
+            margin: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Moderated Frames for Video {{ video_id }}</h1>
+
+    <div class="controls">
+        <a href="{% url 'video_list' %}">Back to Video List</a>
+        <a href="{% url 'transcribe_audio' video_id %}">Transcribe & Censor Audio</a>
+    </div>
+
+    {% if frames %}
+        <div class="frames-container">
+            {% for frame in frames %}
+                <img src="{{ frame }}" alt="Frame {{ forloop.counter }}">
+            {% endfor %}
+        </div>
+    {% else %}
+        <p style="text-align: center;">No frames found.</p>
+    {% endif %}
+</body>
+</html>
